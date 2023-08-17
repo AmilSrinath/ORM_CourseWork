@@ -14,3 +14,15 @@
     -fx-background-color: black;
     -fx-text-fill: white;
 }
+
+.userBtn{
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+}
+
+.userBtn:hover{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}

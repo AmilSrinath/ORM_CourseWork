@@ -78,13 +78,6 @@ public class SignUpFormController implements Initializable {
         String email = txtUserEmail.getText();
 
         if (txtPassword2.getText().equalsIgnoreCase(txtRePassword2.getText())){
-
-            System.out.println("Step 1");
-            System.out.println(id);
-            System.out.println(username);
-            System.out.println(password);
-            System.out.println(email);
-
             boolean isSaved = userBO.addUser(new UserDTO(id, username, password, email));
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Saved").show();
@@ -92,5 +85,16 @@ public class SignUpFormController implements Initializable {
         }else {
             new Alert(Alert.AlertType.ERROR,"Error").show();
         }
+        clearTextFilds();
+    }
+
+    private void clearTextFilds() {
+        txtUserID.clear();
+        txtUserEmail.clear();
+        txtUsername.clear();
+        txtPassword2.clear();
+        txtRePassword2.clear();
+        txtRePassword1.clear();
+        txtPassword1.clear();
     }
 }
