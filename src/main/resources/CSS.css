@@ -1,0 +1,16 @@
+.usernamePassword{
+    -fx-prompt-text-fill: black;
+    -fx-text-fill: black;
+}
+
+.LoginBtn{
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+}
+
+.LoginBtn:hover{
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
