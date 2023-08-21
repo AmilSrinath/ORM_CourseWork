@@ -24,7 +24,7 @@
             <Image url="@../assest/UserLine.png" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="txtUserID" focusColor="BLACK" labelFloat="true" layoutX="52.0" layoutY="144.0" prefHeight="33.0" prefWidth="333.0" promptText="User ID" styleClass="usernamePassword" stylesheets="@../CSS.css" unFocusColor="BLACK">
+      <JFXTextField fx:id="txtUserID" disable="true" focusColor="BLACK" labelFloat="true" layoutX="52.0" layoutY="144.0" prefHeight="33.0" prefWidth="333.0" promptText="User ID" styleClass="usernamePassword" stylesheets="@../CSS.css" unFocusColor="BLACK">
          <font>
             <Font size="18.0" />
          </font>
@@ -75,7 +75,7 @@
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <Button layoutX="52.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="32.0" prefWidth="109.0" styleClass="LoginBtn" stylesheets="@../CSS.css" text="Save">
+      <Button layoutX="280.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="32.0" prefWidth="109.0" styleClass="LoginBtn" stylesheets="@../CSS.css" text="Save">
          <font>
             <Font name="Arial Bold" size="17.0" />
          </font>
@@ -85,12 +85,12 @@
             <Font name="Arial Bold" size="17.0" />
          </font>
       </Button>
-      <Button layoutX="280.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="32.0" prefWidth="109.0" styleClass="LoginBtn" stylesheets="@../CSS.css" text="Delete">
+      <Button layoutX="52.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="32.0" prefWidth="109.0" styleClass="LoginBtn" stylesheets="@../CSS.css" text="Delete">
          <font>
             <Font name="Arial Bold" size="17.0" />
          </font>
       </Button>
-      <TableView fx:id="tblUser" layoutX="469.0" layoutY="150.0" prefHeight="404.0" prefWidth="613.0" stylesheets="@../CSS.css">
+      <TableView fx:id="tblUser" layoutX="469.0" layoutY="150.0" onMouseClicked="#rowOnMouseClicked" prefHeight="404.0" prefWidth="613.0" stylesheets="@../CSS.css">
         <columns>
           <TableColumn fx:id="colID" prefWidth="84.0" text="ID" />
           <TableColumn fx:id="colName" prefWidth="184.0" text="Name" />
@@ -98,5 +98,10 @@
             <TableColumn fx:id="colEmail" prefWidth="198.0" text="Email" />
         </columns>
       </TableView>
+      <Button layoutX="52.0" layoutY="509.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="34.0" prefWidth="333.0" styleClass="LoginBtn" stylesheets="@../CSS.css" text="Clear">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

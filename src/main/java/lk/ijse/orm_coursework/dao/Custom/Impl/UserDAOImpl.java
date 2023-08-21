@@ -40,12 +40,46 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean delete(String id) throws SQLException, ClassNotFoundException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String sql = "DELETE FROM user WHERE userid = :id";
+        NativeQuery<User> nativeQuery = session.createNativeQuery(sql);
+        nativeQuery.setParameter("id",id);
+        nativeQuery.executeUpdate();
+
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
-    public String generateNewID() throws SQLException, ClassNotFoundException {
-        return null;
+    public String generateNewID() throws SQLException, ClassNotFoundException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery<String> nativeQuery = session.createNativeQuery("SELECT userid FROM User ORDER BY userid DESC LIMIT 1");
+        String id = nativeQuery.uniqueResult();
+        transaction.commit();
+        session.close();
+
+        if(id != null){
+            String[] strings = id.split("U0");
+            int newID = Integer.parseInt(strings[1]);
+            newID++;
+            String ID = String.valueOf(newID);
+            int length = ID.length();
+            if (length < 2){
+                return "U00"+newID;
+            }else {
+                if (length < 3){
+                    return "U0"+newID;
+                }else {
+                    return "U"+newID;
+                }
+            }
+        }else {
+            return "U001";
+        }
     }
 }

@@ -13,7 +13,7 @@ public interface UserBO extends SuperBO {
 
     public boolean updateUser(UserDTO dto) throws SQLException, ClassNotFoundException;
 
-    public boolean deleteUser(String id) throws SQLException, ClassNotFoundException;
+    public boolean deleteUser(String id) throws SQLException, ClassNotFoundException, IOException;
 
-    public String generateNewUserID() throws SQLException, ClassNotFoundException;
+    public String generateNewUserID() throws SQLException, ClassNotFoundException, IOException;
 }

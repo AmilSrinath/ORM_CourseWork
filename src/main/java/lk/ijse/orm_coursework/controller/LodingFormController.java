@@ -25,7 +25,7 @@ public class LodingFormController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Timeline timeline = new Timeline();
-        KeyFrame keyFrame1 = new KeyFrame(Duration.millis(8000), actionEvent -> {
+        KeyFrame keyFrame1 = new KeyFrame(Duration.millis(100), actionEvent -> {
             Session session = null;
             try {
                 session = FactoryConfiguration.getInstance().getSession();

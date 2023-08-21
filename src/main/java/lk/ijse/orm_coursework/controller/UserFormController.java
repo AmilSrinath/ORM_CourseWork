@@ -6,9 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.orm_coursework.bo.BOFactory;
@@ -20,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class UserFormController implements Initializable {
@@ -40,6 +39,8 @@ public class UserFormController implements Initializable {
     UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
     ObservableList<User> observableList;
 
+    String ID;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,6 +55,11 @@ public class UserFormController implements Initializable {
         }
 
         setCellValueFactory();
+        try {
+            generateNextUserId();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         txtPassword1.setVisible(false);
         txtRePassword1.setVisible(false);
@@ -113,13 +119,64 @@ public class UserFormController implements Initializable {
         }else {
             new Alert(Alert.AlertType.ERROR, "Don't match Passwords!!").show();
         }
+        clearTextFileds();
+        generateNextUserId();
+        getAll();
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
 
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
+    public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, IOException {
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
+        if (result.orElse(no) == yes) {
+            if (!userBO.deleteUser(ID)) {
+                new Alert(Alert.AlertType.ERROR, "Error!!").show();
+            }
+        }
+        generateNextUserId();
+        clearTextFileds();
+        getAll();
+    }
+
+    public void clearTextFileds(){
+        txtUsername.clear();
+        txtPassword2.clear();
+        txtRePassword2.clear();
+        txtUserEmail.clear();
+    }
+
+    private void generateNextUserId() throws ClassNotFoundException {
+        try {
+            String nextId = userBO.generateNewUserID();
+            txtUserID.setText(nextId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void rowOnMouseClicked(MouseEvent mouseEvent) {
+        Integer index = tblUser.getSelectionModel().getSelectedIndex();
+        if (index <= -1) {
+            return;
+        }
+        ID = colID.getCellData(index).toString();
+        txtUsername.setText(colName.getCellData(index).toString());
+        txtPassword2.setText(colPassword.getCellData(index).toString());
+        txtRePassword2.setText(colPassword.getCellData(index).toString());
+        txtUserEmail.setText(colEmail.getCellData(index).toString());
+
+
+        System.out.println(ID);
+    }
+
+    public void btnClearOnAction(ActionEvent actionEvent) {
+        clearTextFileds();
     }
 }
