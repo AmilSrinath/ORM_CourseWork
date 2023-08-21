@@ -5,6 +5,7 @@ import lk.ijse.orm_coursework.entity.User;
 import lk.ijse.orm_coursework.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,8 +13,15 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
     @Override
-    public List<User> getAll() throws SQLException, ClassNotFoundException {
-        return null;
+    public List<User> getAll() throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery nativeQuery = session.createNativeQuery("SELECT * FROM user");
+        nativeQuery.addEntity(User.class);
+        List<User> users = nativeQuery.getResultList();
+        transaction.commit();
+        session.close();
+        return users;
     }
 
     @Override

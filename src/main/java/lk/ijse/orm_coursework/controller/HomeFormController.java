@@ -20,12 +20,12 @@ public class HomeFormController implements Initializable {
     public ImageView UserImg;
     public ImageView RoomImg;
     public ImageView StudentImg;
-    public StackPane ControllArea;
     public Button btnUser;
     public Button btnRoom;
     public Button btnStudent;
     public Label lblD24;
     public Label lblWelcome;
+    public AnchorPane ControllArea;
 
     int user=0;
     int room=0;
