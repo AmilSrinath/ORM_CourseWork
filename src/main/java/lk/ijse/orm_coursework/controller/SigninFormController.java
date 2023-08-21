@@ -31,8 +31,13 @@ public class SigninFormController implements Initializable {
     }
 
     @FXML
-    void btnSignInOnAction(ActionEvent event) {
-
+    void btnSignInOnAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/HomeForm.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.show();
+        SignInForm.getScene().getWindow().hide();
     }
 
     @FXML

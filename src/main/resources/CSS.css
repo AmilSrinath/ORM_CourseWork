@@ -22,7 +22,3 @@
     -fx-border-color: black;
 }
 
-.userBtn:hover{
-    -fx-background-color: black;
-    -fx-text-fill: white;
-}
