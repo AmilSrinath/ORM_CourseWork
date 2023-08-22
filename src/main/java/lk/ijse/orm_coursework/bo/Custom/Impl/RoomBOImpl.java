@@ -33,13 +33,13 @@ public class RoomBOImpl implements RoomBO {
     }
 
     @Override
-    public boolean updateRoom(RoomDTO dto) {
-        return false;
+    public boolean updateRoom(RoomDTO dto) throws SQLException, IOException, ClassNotFoundException {
+        return roomDAO.update(new Room(dto.getId(), dto.getType(), dto.getKeymoney(), dto.getQuntity()));
     }
 
     @Override
-    public boolean deleteRoom(String id) {
-        return false;
+    public boolean deleteRoom(String id) throws SQLException, IOException, ClassNotFoundException {
+        return roomDAO.delete(id);
     }
 
     @Override

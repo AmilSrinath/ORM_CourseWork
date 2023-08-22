@@ -6,23 +6,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.orm_coursework.bo.BOFactory;
 import lk.ijse.orm_coursework.bo.Custom.RoomBO;
-import lk.ijse.orm_coursework.bo.Custom.UserBO;
 import lk.ijse.orm_coursework.dto.RoomDTO;
-import lk.ijse.orm_coursework.dto.UserDTO;
 import lk.ijse.orm_coursework.entity.Room;
-import lk.ijse.orm_coursework.entity.User;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RoomFormController implements Initializable {
@@ -52,11 +48,7 @@ public class RoomFormController implements Initializable {
         }
         try {
             getAll();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             throw new RuntimeException(e);
         }
         setCellValueFactory();
@@ -106,12 +98,34 @@ public class RoomFormController implements Initializable {
         txtRoomQut.clear();
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        double keyMoney = Double.parseDouble(txtKeymoney.getText());
+        int qut = Integer.parseInt(txtRoomQut.getText());
+        String type = comRoomType.getValue();
 
+        if(roomBO.updateRoom(new RoomDTO(ID,type,keyMoney,qut))){
+            new Alert(Alert.AlertType.CONFIRMATION, "Update Successfully!!").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Error!!").show();
+        }
+
+        clearTextFileds();
+        getAll();
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
+    public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
+        if (result.orElse(no) == yes) {
+            if (!roomBO.deleteRoom(ID)) {
+                new Alert(Alert.AlertType.ERROR, "Error!!").show();
+            }
+        }
+        generateNextUserId();
+        clearTextFileds();
+        getAll();
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {

@@ -90,7 +90,7 @@
             <Font name="Arial Bold" size="17.0" />
          </font>
       </Button>
-      <TableView fx:id="tblUser" layoutX="469.0" layoutY="150.0" onMouseClicked="#rowOnMouseClicked" prefHeight="404.0" prefWidth="613.0" stylesheets="@../CSS.css">
+      <TableView fx:id="tblUser" layoutX="479.0" layoutY="160.0" onMouseClicked="#rowOnMouseClicked" prefHeight="404.0" prefWidth="613.0" stylesheets="@../CSS.css">
         <columns>
           <TableColumn fx:id="colID" prefWidth="84.0" text="ID" />
           <TableColumn fx:id="colName" prefWidth="184.0" text="Name" />
