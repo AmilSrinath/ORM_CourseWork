@@ -35,8 +35,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean update(User entity) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean update(User entity) throws SQLException, ClassNotFoundException, IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override

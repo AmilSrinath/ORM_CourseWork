@@ -124,8 +124,22 @@ public class UserFormController implements Initializable {
         getAll();
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, IOException {
+        String name = txtUsername.getText();
+        String password = txtRePassword2.getText();
+        String email = txtUserEmail.getText();
 
+        if (password.equalsIgnoreCase(txtPassword2.getText())) {
+            if(userBO.updateUser(new UserDTO(ID,name,password,email))){
+                new Alert(Alert.AlertType.CONFIRMATION, "Update Successfully!!").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Error!!").show();
+            }
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Don't match Passwords!!").show();
+        }
+        clearTextFileds();
+        getAll();
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, IOException {
@@ -171,9 +185,6 @@ public class UserFormController implements Initializable {
         txtPassword2.setText(colPassword.getCellData(index).toString());
         txtRePassword2.setText(colPassword.getCellData(index).toString());
         txtUserEmail.setText(colEmail.getCellData(index).toString());
-
-
-        System.out.println(ID);
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {

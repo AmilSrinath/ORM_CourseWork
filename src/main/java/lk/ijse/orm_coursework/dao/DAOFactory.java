@@ -1,6 +1,9 @@
 package lk.ijse.orm_coursework.dao;
 
+import lk.ijse.orm_coursework.dao.Custom.Impl.RoomDAOImpl;
 import lk.ijse.orm_coursework.dao.Custom.Impl.UserDAOImpl;
+
+import static lk.ijse.orm_coursework.bo.BOFactory.BOTypes.ROOM;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -13,13 +16,15 @@ public class DAOFactory {
     }
 
     public enum DAOTypes {
-        USER
+        USER,ROOM
     }
 
     public SuperDAO getDAO(DAOTypes types){
         switch (types) {
             case USER:
                 return new UserDAOImpl();
+            case ROOM:
+                return new RoomDAOImpl();
             default:
                 return null;
         }

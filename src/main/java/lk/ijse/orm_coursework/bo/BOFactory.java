@@ -1,5 +1,6 @@
 package lk.ijse.orm_coursework.bo;
 
+import lk.ijse.orm_coursework.bo.Custom.Impl.RoomBOImpl;
 import lk.ijse.orm_coursework.bo.Custom.Impl.UserBOImpl;
 
 public class BOFactory {
@@ -11,7 +12,7 @@ public class BOFactory {
     }
 
     public enum BOTypes{
-        USER
+        USER,ROOM
     }
 
     //Object creation logic for BO objects
@@ -19,6 +20,8 @@ public class BOFactory {
         switch (types){
             case USER:
                 return new UserBOImpl();
+            case ROOM:
+                return new RoomBOImpl();
             default:
                 return null;
         }
