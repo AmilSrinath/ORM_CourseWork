@@ -6,6 +6,7 @@ import lk.ijse.orm_coursework.dao.Custom.StudentDAO;
 import lk.ijse.orm_coursework.dao.DAOFactory;
 import lk.ijse.orm_coursework.dto.RoomDTO;
 import lk.ijse.orm_coursework.dto.StudentDTO;
+import lk.ijse.orm_coursework.entity.Reservation;
 import lk.ijse.orm_coursework.entity.Room;
 import lk.ijse.orm_coursework.entity.Student;
 
@@ -23,28 +24,28 @@ public class StudentBOImpl implements StudentBO {
         List<StudentDTO> allStudent= new ArrayList<>();
         List<Student> all = studentDAO.getAll();
         for (Student student : all) {
-            allStudent.add(new StudentDTO(student.getId(), student.getName(), student.getAddress(), student.getContact(), student.getDob(), student.getGender()));
+            allStudent.add(new StudentDTO(student.getId(), student.getName(), student.getAddress(), student.getContact(), student.getDob(), student.getGender(), student.getReservations()));
         }
         return allStudent;
     }
 
     @Override
     public boolean addStudent(StudentDTO dto) throws SQLException, ClassNotFoundException, IOException {
-        return false;
+        return studentDAO.add(new Student(dto.getId(), dto.getName(), dto.getAddress(), dto.getContact(), dto.getDob(), dto.getGender(), new ArrayList<Reservation>()));
     }
 
     @Override
     public boolean updateStudent(StudentDTO dto) throws SQLException, ClassNotFoundException, IOException {
-        return false;
+        return studentDAO.update(new Student(dto.getId(), dto.getName(), dto.getAddress(), dto.getContact(), dto.getDob(), dto.getGender(), new ArrayList<Reservation>()));
     }
 
     @Override
     public boolean deleteStudent(String id) throws SQLException, ClassNotFoundException, IOException {
-        return false;
+        return studentDAO.delete(id);
     }
 
     @Override
     public String generateNewStudentID() throws SQLException, ClassNotFoundException, IOException {
-        return null;
+        return studentDAO.generateNewID();
     }
 }

@@ -1,6 +1,9 @@
 package lk.ijse.orm_coursework.dao.Custom.Impl;
 
-import lk.ijse.orm_coursework.dao.Custom.UserDAO;
+import lk.ijse.orm_coursework.dao.Custom.ReservationDAO;
+import lk.ijse.orm_coursework.entity.Reservation;
+import lk.ijse.orm_coursework.entity.Room;
+import lk.ijse.orm_coursework.entity.Student;
 import lk.ijse.orm_coursework.entity.User;
 import lk.ijse.orm_coursework.util.FactoryConfiguration;
 import org.hibernate.Session;
@@ -8,24 +11,27 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAOImpl implements UserDAO {
+public class ReservationDAOImpl implements ReservationDAO {
+
     @Override
-    public List<User> getAll() throws IOException {
+    public List<Reservation> getAll() throws SQLException, ClassNotFoundException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        NativeQuery nativeQuery = session.createNativeQuery("SELECT * FROM user");
-        nativeQuery.addEntity(User.class);
-        List<User> users = nativeQuery.getResultList();
+        NativeQuery nativeQuery = session.createNativeQuery("SELECT * FROM reservation");
+        nativeQuery.addEntity(Reservation.class);
+        List<Reservation> reservations = nativeQuery.getResultList();
         transaction.commit();
         session.close();
-        return users;
+        return reservations;
     }
 
     @Override
-    public boolean add(User entity) throws SQLException, ClassNotFoundException, IOException {
+    public boolean add(Reservation entity) throws SQLException, ClassNotFoundException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         session.persist(entity);
@@ -35,7 +41,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean update(User entity) throws SQLException, ClassNotFoundException, IOException {
+    public boolean update(Reservation entity) throws SQLException, ClassNotFoundException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         session.update(entity);
@@ -49,7 +55,7 @@ public class UserDAOImpl implements UserDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        String sql = "DELETE FROM user WHERE userid = :id";
+        String sql = "DELETE FROM reservation WHERE id = :id";
         NativeQuery<User> nativeQuery = session.createNativeQuery(sql);
         nativeQuery.setParameter("id",id);
         nativeQuery.executeUpdate();
@@ -60,51 +66,53 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public String generateNewID() throws IOException {
+    public String generateNewID() throws SQLException, ClassNotFoundException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        NativeQuery<String> nativeQuery = session.createNativeQuery("SELECT userid FROM User ORDER BY userid DESC LIMIT 1");
+        NativeQuery<String> nativeQuery = session.createNativeQuery("SELECT id FROM reservation ORDER BY id DESC LIMIT 1");
         String id = nativeQuery.uniqueResult();
         transaction.commit();
         session.close();
 
         if(id != null){
-            String[] strings = id.split("U0");
+            String[] strings = id.split("R0");
             int newID = Integer.parseInt(strings[1]);
             newID++;
             String ID = String.valueOf(newID);
             int length = ID.length();
             if (length < 2){
-                return "U00"+newID;
+                return "R00"+newID;
             }else {
                 if (length < 3){
-                    return "U0"+newID;
+                    return "R0"+newID;
                 }else {
-                    return "U"+newID;
+                    return "R"+newID;
                 }
             }
         }else {
-            return "U001";
+            return "R001";
         }
     }
 
     @Override
-    public boolean checkPassword(String username, String password) throws IOException {
+    public List<String> loadStudentID() throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-
-        NativeQuery<String> nativeQuery = session.createNativeQuery("SELECT password FROM user WHERE username = :username");
-        nativeQuery.setParameter("username",username);
-
-        String pass = nativeQuery.uniqueResult();
-
+        NativeQuery nativeQuery = session.createNativeQuery("SELECT id FROM student");
+        List<String> studentIds = nativeQuery.getResultList();
         transaction.commit();
         session.close();
+        return studentIds;
+    }
 
-        if (password.equalsIgnoreCase(pass)) {
-            return true;
-        }else {
-            return false;
-        }
+    @Override
+    public List<String> loadRoomID() throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery nativeQuery = session.createNativeQuery("SELECT id FROM room");
+        List<String> roomIds = nativeQuery.getResultList();
+        transaction.commit();
+        session.close();
+        return roomIds;
     }
 }

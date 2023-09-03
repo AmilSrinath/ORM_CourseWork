@@ -19,13 +19,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LodingFormController implements Initializable {
-
     public AnchorPane LodingForm;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Timeline timeline = new Timeline();
-        KeyFrame keyFrame1 = new KeyFrame(Duration.millis(100), actionEvent -> {
+        KeyFrame keyFrame1 = new KeyFrame(Duration.millis(8000), actionEvent -> {
             Session session = null;
             try {
                 session = FactoryConfiguration.getInstance().getSession();

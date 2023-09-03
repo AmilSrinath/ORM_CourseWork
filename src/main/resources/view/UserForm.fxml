@@ -19,11 +19,6 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <ImageView fitHeight="60.0" fitWidth="1106.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assest/UserLine.png" />
-         </image>
-      </ImageView>
       <JFXTextField fx:id="txtUserID" disable="true" focusColor="BLACK" labelFloat="true" layoutX="52.0" layoutY="144.0" prefHeight="33.0" prefWidth="333.0" promptText="User ID" styleClass="usernamePassword" stylesheets="@../CSS.css" unFocusColor="BLACK">
          <font>
             <Font size="18.0" />

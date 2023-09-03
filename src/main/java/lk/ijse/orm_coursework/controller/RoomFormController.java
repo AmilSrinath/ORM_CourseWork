@@ -12,11 +12,13 @@ import javafx.scene.input.MouseEvent;
 import lk.ijse.orm_coursework.bo.BOFactory;
 import lk.ijse.orm_coursework.bo.Custom.RoomBO;
 import lk.ijse.orm_coursework.dto.RoomDTO;
+import lk.ijse.orm_coursework.entity.Reservation;
 import lk.ijse.orm_coursework.entity.Room;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -75,7 +77,7 @@ public class RoomFormController implements Initializable {
         List<RoomDTO> allroom = roomBO.getAllRooms();
 
         for (RoomDTO roomDTO : allroom){
-            observableList.add(new Room(roomDTO.getId(), roomDTO.getType(), roomDTO.getKeymoney(), roomDTO.getQuntity()));
+            observableList.add(new Room(roomDTO.getId(), roomDTO.getType(), roomDTO.getKeymoney(), roomDTO.getQuntity(), new ArrayList<Reservation>()));
         }
         tblRoom.setItems(observableList);
     }

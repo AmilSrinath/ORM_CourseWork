@@ -1,5 +1,6 @@
 package lk.ijse.orm_coursework.util;
 
+import lk.ijse.orm_coursework.entity.Reservation;
 import lk.ijse.orm_coursework.entity.Room;
 import lk.ijse.orm_coursework.entity.Student;
 import lk.ijse.orm_coursework.entity.User;
@@ -21,6 +22,7 @@ public class FactoryConfiguration {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Room.class);
         configuration.addAnnotatedClass(Student.class);
+        configuration.addAnnotatedClass(Reservation.class);
         sessionFactory = configuration.buildSessionFactory();
     }
 

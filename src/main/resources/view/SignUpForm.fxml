@@ -17,7 +17,7 @@
             <Image url="@../assest/SignUp.png" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="txtUserID" focusColor="BLACK" labelFloat="true" layoutX="78.0" layoutY="177.0" prefHeight="32.0" prefWidth="282.0" promptText="User ID" styleClass="usernamePassword" stylesheets="@../CSS.css" unFocusColor="BLACK">
+      <JFXTextField fx:id="txtUserID" disable="true" focusColor="BLACK" labelFloat="true" layoutX="78.0" layoutY="177.0" prefHeight="32.0" prefWidth="282.0" promptText="User ID" styleClass="usernamePassword" stylesheets="@../CSS.css" unFocusColor="BLACK">
          <font>
             <Font size="15.0" />
          </font>

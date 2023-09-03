@@ -2,13 +2,15 @@ package lk.ijse.orm_coursework.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
 
 @Entity
 public class Student {
@@ -19,4 +21,6 @@ public class Student {
     private String contact;
     private String dob;
     private String gender;
+    @OneToMany(mappedBy = "student")
+    private List<Reservation> reservations;
 }

@@ -14,7 +14,7 @@ import lombok.*;
 public class User {
     @Id
     private String userid;
-    private String name;
+    private String username;
     private String password;
     private String email;
 }

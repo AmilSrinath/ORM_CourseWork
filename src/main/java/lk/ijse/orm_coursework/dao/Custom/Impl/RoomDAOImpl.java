@@ -68,7 +68,6 @@ public class RoomDAOImpl implements RoomDAO {
         String id = nativeQuery.uniqueResult();
         transaction.commit();
         session.close();
-        System.out.println(id);
 
         if(id != null){
             String[] strings = id.split("RM-");
@@ -88,5 +87,18 @@ public class RoomDAOImpl implements RoomDAO {
         }else {
             return "RM-001";
         }
+    }
+
+    @Override
+    public void updateRoomQut() throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String sql = "UPDATE room SET quntity = (quntity - 1)";
+        NativeQuery<User> nativeQuery = session.createNativeQuery(sql);
+        nativeQuery.executeUpdate();
+
+        transaction.commit();
+        session.close();
     }
 }

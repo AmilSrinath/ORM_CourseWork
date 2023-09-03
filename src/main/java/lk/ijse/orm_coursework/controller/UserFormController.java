@@ -26,9 +26,9 @@ public class UserFormController implements Initializable {
     public JFXTextField txtUserID;
     public JFXTextField txtUsername;
     public JFXTextField txtPassword1;
-    public JFXPasswordField txtPassword2;
     public JFXTextField txtUserEmail;
     public JFXTextField txtRePassword1;
+    public JFXPasswordField txtPassword2;
     public JFXPasswordField txtRePassword2;
     public TableView<User> tblUser;
     public TableColumn<?,?> colID;
@@ -46,11 +46,7 @@ public class UserFormController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             getAll();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -77,7 +73,7 @@ public class UserFormController implements Initializable {
 
     void setCellValueFactory(){
         colID.setCellValueFactory(new PropertyValueFactory<>("userid"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("username"));
         colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
@@ -168,9 +164,7 @@ public class UserFormController implements Initializable {
         try {
             String nextId = userBO.generateNewUserID();
             txtUserID.setText(nextId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }

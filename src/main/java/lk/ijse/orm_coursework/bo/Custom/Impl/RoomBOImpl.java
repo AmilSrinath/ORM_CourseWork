@@ -5,6 +5,7 @@ import lk.ijse.orm_coursework.dao.Custom.RoomDAO;
 import lk.ijse.orm_coursework.dao.DAOFactory;
 import lk.ijse.orm_coursework.dto.RoomDTO;
 import lk.ijse.orm_coursework.dto.UserDTO;
+import lk.ijse.orm_coursework.entity.Reservation;
 import lk.ijse.orm_coursework.entity.Room;
 import lk.ijse.orm_coursework.entity.User;
 
@@ -29,12 +30,12 @@ public class RoomBOImpl implements RoomBO {
 
     @Override
     public boolean addRoom(RoomDTO dto) throws SQLException, ClassNotFoundException, IOException {
-        return roomDAO.add(new Room(dto.getId(), dto.getType(), dto.getKeymoney(), dto.getQuntity()));
+        return roomDAO.add(new Room(dto.getId(), dto.getType(), dto.getKeymoney(), dto.getQuntity(), new ArrayList<Reservation>()));
     }
 
     @Override
     public boolean updateRoom(RoomDTO dto) throws SQLException, IOException, ClassNotFoundException {
-        return roomDAO.update(new Room(dto.getId(), dto.getType(), dto.getKeymoney(), dto.getQuntity()));
+        return roomDAO.update(new Room(dto.getId(), dto.getType(), dto.getKeymoney(), dto.getQuntity(), new ArrayList<Reservation>()));
     }
 
     @Override

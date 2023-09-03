@@ -5,13 +5,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="786.0" prefWidth="1106.0" style="-fx-background-color: #9fe2df;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.orm_coursework.controller.HomeFormController">
+<AnchorPane fx:id="homePage" prefHeight="786.0" prefWidth="1106.0" style="-fx-background-color: #9fe2df;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.orm_coursework.controller.HomeFormController">
    <children>
-      <Button fx:id="btnUser" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="246.0" layoutY="27.0" mnemonicParsing="false" onAction="#btnUserOnAction" onMouseClicked="#btnUserOnMouseClicked" onMouseEntered="#btnUserOnMouseEntered" onMouseExited="#btnUserOnMouseExited" prefHeight="120.0" prefWidth="150.0" styleClass="userBtn" stylesheets="@../CSS.css" text="User">
+      <Button fx:id="btnUser" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="169.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnUserOnAction" onMouseClicked="#btnUserOnMouseClicked" onMouseEntered="#btnUserOnMouseEntered" onMouseExited="#btnUserOnMouseExited" prefHeight="120.0" prefWidth="150.0" styleClass="userBtn" stylesheets="@../CSS.css" text="User">
          <font>
-            <Font size="28.0" />
+            <Font size="22.0" />
          </font>
          <graphic>
             <ImageView fx:id="UserImg" fitHeight="100.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
@@ -21,9 +22,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnRoom" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="480.0" layoutY="27.0" mnemonicParsing="false" onAction="#btnRoomOnAction" onMouseClicked="#btnRoomOnMouseClicked" onMouseEntered="#btnRoomOnMouseEntered" onMouseExited="#btnRoomOnMouseExited" prefHeight="120.0" prefWidth="150.0" styleClass="userBtn" stylesheets="@../CSS.css" text="Room">
+      <Button fx:id="btnRoom" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="388.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnRoomOnAction" onMouseClicked="#btnRoomOnMouseClicked" onMouseEntered="#btnRoomOnMouseEntered" onMouseExited="#btnRoomOnMouseExited" prefHeight="120.0" prefWidth="150.0" styleClass="userBtn" stylesheets="@../CSS.css" text="Room">
          <font>
-            <Font size="28.0" />
+            <Font size="22.0" />
          </font>
          <graphic>
             <ImageView fx:id="RoomImg" fitHeight="100.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
@@ -33,9 +34,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnStudent" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="714.0" layoutY="27.0" mnemonicParsing="false" onAction="#btnStudentOnAction" onMouseClicked="#btnStudentOnMouseClicked" onMouseEntered="#btnStudentOnMouseEntered" onMouseExited="#btnStudentOnMouseExited" prefHeight="120.0" prefWidth="150.0" styleClass="userBtn" stylesheets="@../CSS.css" text="Student">
+      <Button fx:id="btnStudent" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="607.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnStudentOnAction" onMouseClicked="#btnStudentOnMouseClicked" onMouseEntered="#btnStudentOnMouseEntered" onMouseExited="#btnStudentOnMouseExited" prefHeight="120.0" prefWidth="150.0" styleClass="userBtn" stylesheets="@../CSS.css" text="Student">
          <font>
-            <Font size="28.0" />
+            <Font size="22.0" />
          </font>
          <graphic>
             <ImageView fx:id="StudentImg" fitHeight="100.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
@@ -59,5 +60,27 @@
             </Label>
          </children>
       </AnchorPane>
+      <Button layoutX="1041.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" prefHeight="31.0" prefWidth="51.0">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assest/logout_FILL0_wght400_GRAD0_opsz48.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnReservation" alignment="BOTTOM_CENTER" contentDisplay="TOP" layoutX="826.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnReservationOnAction" onMouseClicked="#btnReservationOnMouseClicked" onMouseEntered="#btnReservationOnMouseEntered" onMouseExited="#btnReservationOnMouseExited" prefHeight="124.0" prefWidth="150.0" styleClass="userBtn" stylesheets="@../CSS.css" text="Reservation">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="ReservationImg" fitHeight="100.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assest/rese1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Line endX="1005.0" endY="0.9999847412109375" layoutX="101.0" layoutY="173.0" startX="-100.0" />
    </children>
 </AnchorPane>

@@ -18,7 +18,7 @@ public class UserBOImpl implements UserBO {
         List<UserDTO> allUsers= new ArrayList<>();
         List<User> all = userDAO.getAll();
         for (User user : all) {
-            allUsers.add(new UserDTO(user.getUserid(), user.getName(), user.getPassword(), user.getEmail()));
+            allUsers.add(new UserDTO(user.getUserid(), user.getUsername(), user.getPassword(), user.getEmail()));
         }
         return allUsers;
     }

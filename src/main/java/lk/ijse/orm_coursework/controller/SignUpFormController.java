@@ -36,6 +36,11 @@ public class SignUpFormController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         txtPassword1.setVisible(false);
         txtRePassword1.setVisible(false);
+        try {
+            generateNextUserId();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void showPasswordOnMousePresseds(MouseEvent mouseEvent) {
@@ -86,6 +91,7 @@ public class SignUpFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR,"Error").show();
         }
         clearTextFilds();
+        generateNextUserId();
     }
 
     private void clearTextFilds() {
@@ -96,5 +102,14 @@ public class SignUpFormController implements Initializable {
         txtRePassword2.clear();
         txtRePassword1.clear();
         txtPassword1.clear();
+    }
+
+    private void generateNextUserId() throws ClassNotFoundException {
+        try {
+            String nextId = userBO.generateNewUserID();
+            txtUserID.setText(nextId);
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -13,4 +13,5 @@ module lk.ijse.orm_coursework {
     exports lk.ijse.orm_coursework.controller;
     opens lk.ijse.orm_coursework.controller to javafx.fxml;
     opens lk.ijse.orm_coursework.entity;
+    opens lk.ijse.orm_coursework.entity.tm;
 }
