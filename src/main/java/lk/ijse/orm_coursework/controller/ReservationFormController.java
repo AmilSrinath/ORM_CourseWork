@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class ReservationFormController implements Initializable {
 
@@ -39,6 +42,7 @@ public class ReservationFormController implements Initializable {
     public AnchorPane ReservationForm;
     @FXML
     public JFXTextField txtStatus;
+    public JFXTextField txtSearch;
 
     @FXML
     private JFXTextField txtReservationID;
@@ -104,6 +108,8 @@ public class ReservationFormController implements Initializable {
         } catch (SQLException | IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
+        searchFilter();
     }
 
     @FXML
@@ -133,6 +139,7 @@ public class ReservationFormController implements Initializable {
         clearTextFileds();
         generateNextUserId();
         getAll();
+        searchFilter();
     }
 
     private void getAll() throws SQLException, IOException, ClassNotFoundException {
@@ -188,6 +195,7 @@ public class ReservationFormController implements Initializable {
 
         clearTextFileds();
         getAll();
+        searchFilter();
     }
 
     @FXML
@@ -204,6 +212,7 @@ public class ReservationFormController implements Initializable {
         generateNextUserId();
         clearTextFileds();
         getAll();
+        searchFilter();
     }
 
     @FXML
@@ -237,5 +246,35 @@ public class ReservationFormController implements Initializable {
             obList.add(un);
         }
         comRoomID.setItems(obList);
+    }
+
+    private void searchFilter(){
+        FilteredList<ReservationTM> filterData = new FilteredList<>(observableList, e -> true);
+        txtSearch.setOnKeyReleased(e->{
+            txtSearch.textProperty().addListener((observableValue, oldValue, newValue) -> {
+                filterData.setPredicate((Predicate<? super ReservationTM>) reservation->{
+                    if (newValue.isEmpty() || newValue.isBlank() || newValue == null){
+                        return true;
+                    }
+                    String searchKeyword = newValue.toLowerCase();
+                    if (reservation.getId().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }else if(reservation.getStatus().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }else if(reservation.getSid().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }else if(reservation.getRid().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }else if(reservation.getDate().toLowerCase().indexOf(searchKeyword) > -1){
+                        return true;
+                    }
+                    return false;
+                });
+            });
+
+            SortedList<ReservationTM> buyer = new SortedList<>(filterData);
+            buyer.comparatorProperty().bind(tblReservation.comparatorProperty());
+            tblReservation.setItems(buyer);
+        });
     }
 }

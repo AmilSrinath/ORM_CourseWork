@@ -59,5 +59,10 @@
       <JFXComboBox fx:id="comStudentID" focusColor="BLACK" layoutX="72.0" layoutY="228.0" prefHeight="33.0" prefWidth="333.0" promptText="Student ID" style="-fx-font-size: 18px;" unFocusColor="BLACK" />
       <DatePicker fx:id="dataPicker" layoutX="72.0" layoutY="171.0" prefHeight="35.0" prefWidth="333.0" promptText="Date" style="-fx-font-size: 18px;" />
       <JFXComboBox fx:id="comRoomID" focusColor="BLACK" layoutX="72.0" layoutY="285.0" prefHeight="33.0" prefWidth="333.0" promptText="Room ID" style="-fx-font-size: 18px;" unFocusColor="BLACK" />
+      <JFXTextField fx:id="txtSearch" focusColor="BLACK" labelFloat="true" layoutX="827.0" layoutY="114.0" prefHeight="35.0" prefWidth="256.0" promptText="Search" styleClass="usernamePassword" stylesheets="@../CSS.css" unFocusColor="BLACK">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
    </children>
 </AnchorPane>
